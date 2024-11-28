@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <div class="main">
+            <input type="text" name="nome" id="personName">
+            <button onclick="adicionarPessoa()">Confirmar</button>
+            <h1>Nome: Matheus</h1>
+            <h1>Quant: <h1 id="quantidade">0</h1></h1>
+        </div>
+
+        <div class="container" id="item_container">
+            <div class="item">
+                <h4>asda</h4>
+                <button class="closeButton">X</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function adicionarPessoa() {
+            var personName = document.getElementById("personName").value;
+
+            if (personName == '') {
+                alert("ERROR: PREENCHA O CAMPO CORRETAMENTE")
+                return;
+            }
+
+            var classToAdd = document.getElementById("item_container");
+            var quant = document.getElementById("quantidade");
+
+            quant.innerHTML = parseInt(quant.innerHTML) + 1;
+
+            var item = document.createElement("div");
+            item.className = "item";
+
+            var h4 = document.createElement("h4");
+            h4.innerHTML = personName;
+
+            var button = document.createElement("button");
+            button.innerHTML = "X";
+            button.className = "closeButton";
+
+            item.append(h4);
+            item.append(button);
+
+            classToAdd.append(item);
+
+            button.addEventListener('click', function() {
+                item.remove();
+                quant.innerHTML = parseInt(quant.innerHTML) - 1;
+            });
+
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 5px 30px;
+    border: 2px solid firebrick;
+    border-radius: 100px;
+}
+
+.closeButton {
+    color: firebrick;
+    background-color: transparent;
+    border: 2px solid firebrick;
+    padding: 5px 8px;
+    border-radius: 100px;
+
+    transition: 0.5s;
+}
+
+.closeButton:hover {
+    background-color: firebrick;
+    color: white;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

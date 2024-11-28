@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="menu" id="nameMenu">
+        <div class="name-container">
+            <div class="name-menu-close-cointainer">
+                <p>Acesso de conta</p>
+
+                <div class="menu-closes">
+                    <button class="open"></button>
+                    <button class="minimize"></button>
+                    <button class="close" id="name-close" onclick="closeName('nameMenu')"></button>
+                </div>
+            </div>
+
+            <div class="sub-name-container">
+                <div class="name-text">
+                    <h2>Nome do aluno (PRIMEIRO NOME)</h2>
+                </div>
+    
+                <name class="name-inputs">
+                    <input class="name-input" type="text" name="" id="name-input-id">
+                    <button class="name-button" onclick="continueToManager()">Continuar</button>
+                </name>
+            </div>
+        </div>
+    </div>
+
+    <div class="manager" id="managerMenu">
+        <div class="managerMenu" id="managerMenu2">
+            <div class="name-menu-close-cointainer">
+                <p>Acesso de conta</p>
+
+                <div class="menu-closes">
+                    <button class="open"></button>
+                    <button class="minimize"></button>
+                    <button class="close" id="manager-close" onclick="closeName('managerMenu')"></button>
+                </div>
+            </div>
+
+            <div class="top-container">
+                <div class="manager-top-inputs">
+                    <input type="text" name="" id="managerAddConvInput">
+                    <button id="managerAddConvBtn" onclick="addConvidAtList()">Adicionar Convidado</button>
+                </div>
+                
+                <div class="manager-top-texts">
+                    <h3>Nome:<span id="nomeVarString"></span></h3>
+                    <h3>Convidados:<span id="convdidadosInt">0</span></h3>
+                </div>
+            </div>
+
+            <div class="mid-conv-space">
+                <div class="convidadosContainer" id="convidadosContainerID">
+                </div>
+            </div>
+            
+            <div class="slow-manager-container">
+                <button id="finalizeConviList">Finalizar Minha Lista de Convidados</button>
+                <p><u>NOTA</u>: NÃO ATUALIZE A PÁGINA, ao atualizar todo progresso será perdido!</p>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <nav class="nav-bar">
+            <img class="logo" src="imgs/logo.png" alt="logo">
+
+            <ul>
+                <li>
+                    convidados
+                </li>
+                <li>
+                    <button onclick="openName()" class="cadastrarConvidados">Cadastrar convidados</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <script>
+        var personName = "";
+
+        function openName() {
+            var menu = document.getElementById("nameMenu");
+
+            if (personName == "") {
+                menu.classList.toggle("active");
+            } else {
+                var manager = document.getElementById("managerMenu");
+                manager.classList.toggle("active");
+            }
+        }
+
+        function closeName(id) {
+            var menu = document.getElementById(id);
+            
+            menu.style.animation = "fechar 0.6s ease-in-out forwards";
+            
+            menu.addEventListener("animationend", () => {
+                personName = personName;
+                menu.classList.remove("active");
+                menu.style.animation = "";
+            }, { once: true });
+
+            
+        }
+        
+        function continueToManager() {
+            var input = document.getElementById("name-input-id");
+
+            if (input.value == "") {
+                alert("Preencha o campo de nome corretamente!\n\nExemplo: Jonatas");
+                return;
+            }
+
+            var menu = document.getElementById("nameMenu");
+            var manager = document.getElementById("managerMenu");
+
+            personName = input.value;
+            console.log(personName);
+
+            document.getElementById("nomeVarString").innerHTML = personName;
+
+            menu.classList.remove("active");
+            manager.classList.toggle("active");
+        }
+
+        function addConvidAtList() {
+            var inputNameConv = document.getElementById("managerAddConvInput").value;
+
+            if (inputNameConv == "") {
+                alert("Preencha o campo de nome corretamente!\n\nExemplo: João")
+                return;
+            }
+
+            var convidadosContainer = document.getElementById("convidadosContainerID");
+
+            var divConvidado = document.createElement("div");
+            divConvidado.className = "convidado";
+
+            var p = document.createElement("p");
+            p.innerHTML = inputNameConv;
+
+            var button = document.createElement("button");
+            button.innerHTML = "X";
+            button.className = "delet_convidado_btn";
+
+            document.getElementById("convdidadosInt").innerHTML = parseInt(document.getElementById("convdidadosInt").innerHTML) + 1;
+
+            divConvidado.append(p);
+            divConvidado.append(button);
+            
+            button.addEventListener("click", () => {
+                document.getElementById("convdidadosInt").innerHTML = parseInt(document.getElementById("convdidadosInt").innerHTML) - 1;
+                convidadosContainer.removeChild(divConvidado);
+            });
+
+            convidadosContainer.append(divConvidado);
+        }
+
+    </script>
+</body>
+</html>
